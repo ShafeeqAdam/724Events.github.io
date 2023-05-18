@@ -12,6 +12,7 @@ const Select = ({
   titleEmpty,
   label,
   type = "normal",
+  updateFilteredEvents, // Ajout de la prop updateFilteredEvents
 }) => {
   const [value, setValue] = useState();
   const [collapsed, setCollapsed] = useState(true);
@@ -19,7 +20,11 @@ const Select = ({
     onChange();
     setValue(newValue);
     setCollapsed(newValue);
+
+    // Maj de l'état "filteredType" du composant parent en fonction de la valeur sélectionnée
+    updateFilteredEvents(newValue);
   };
+
   return (
     <div className={`SelectContainer ${type}`} data-testid="select-testid">
       {label && <div className="label">{label}</div>}
@@ -88,7 +93,8 @@ Select.propTypes = {
   titleEmpty: PropTypes.bool,
   label: PropTypes.string,
   type: PropTypes.string,
-}
+  updateFilteredEvents: PropTypes.func, // Ajout
+};
 
 Select.defaultProps = {
   onChange: () => null,
@@ -96,6 +102,10 @@ Select.defaultProps = {
   label: "",
   type: "normal",
   name: "select",
-}
+  updateFilteredEvents: () => {}, // Ajout valeur par défaut pour la prop updateFilteredEvents
+};
 
 export default Select;
+
+/* pour faire écho à la logique de filtrage dans Event, j'ai ajouté updateFilteredEvents
+ à tout les prop, et à la const changeValue. */

@@ -24,21 +24,59 @@ describe("When Form is created", () => {
       await screen.findByText("Message envoyé !");
     });
   });
-
 });
 
+jest.mock("../../contexts/DataContext/index", () => ({
+  useData: () => ({
+    last: {
+      cover: "/images/headway-F2KRf_QfCqw-unsplash.png",
+      title: "Conférence #productCON",
+      date: new Date("2022-08-29T20:28:45.744Z"),
+    },
+    data: null,
+    error: null,
+  }),
+}));
 
 describe("When a page is created", () => {
   it("a list of events is displayed", () => {
-    // to implement
-  })
+    render(<Home />);
+
+    const eventListElement = screen.getByTestId("event-list");
+    expect(eventListElement).toBeInTheDocument();
+  });
   it("a list a people is displayed", () => {
-    // to implement
-  })
+    render(<Home />);
+
+    const eventPeopleList = screen.getByTestId("people-list");
+    expect(eventPeopleList).toBeInTheDocument();
+  });
   it("a footer is displayed", () => {
-    // to implement
-  })
+    render(<Home />);
+
+    const footerDisplay = screen.getByTestId("footer-display");
+    expect(footerDisplay).toBeInTheDocument();
+  });
+
   it("an event card, with the last event, is displayed", () => {
-    // to implement
-  })
+    render(<Home />);
+
+    const eventCardElement = screen.getByTestId("event-card");
+    expect(eventCardElement).toBeInTheDocument();
+
+    const eventTitle = screen.getByText("Conférence #productCON");
+    expect(eventTitle).toBeInTheDocument();
+
+    const eventCover = document.querySelector(
+      `img[src="/images/headway-F2KRf_QfCqw-unsplash.png"]`
+    );
+    expect(eventCover).toBeInTheDocument(); // voir avec Luc si QS est autorisé, je l'ai utilisé car pas de texte alt sur l'img de base.
+  });
 });
+
+// import de Home pour les test d'intégration.
+/* Jest.mock est la pour simuler le module DataContext. 
+Dans la fonction de rappel, useData renvoie un objet avec last, data et error.
+Donc pendant le test, le composant testé utilisera la version simulée du contexte, 
+où last aura les valeurs spécifiées. */
+// test d'intégration avec getByText et getBytestId.
