@@ -68,7 +68,7 @@ describe("When a page is created", () => {
     expect(eventTitle).toBeInTheDocument();
 
     const eventCover = document.querySelector(
-      `img[src="/images/headway-F2KRf_QfCqw-unsplash.png"]`
+      'img[src="/images/headway-F2KRf_QfCqw-unsplash.png"]'
     );
     expect(eventCover).toBeInTheDocument(); // voir avec Luc si QS est autorisé, je l'ai utilisé car pas de texte alt sur l'img de base.
   });

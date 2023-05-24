@@ -114,14 +114,16 @@ const Page = () => {
       <footer className="row" data-testid="footer-display">
         <div className="col presta">
           <h3>Notre derniére prestation</h3>
-          <EventCard
-            data-testid="event-card" // ajout test
-            imageSrc={last?.cover}
-            title={last?.title}
-            date={new Date(last?.date)}
-            small // voir avec Luc ={false}
-            label="boom"
-          />
+          {last && (
+            <EventCard
+              data-testid="event-card" // ajout test
+              imageSrc={last.cover}
+              title={last.title}
+              date={new Date(last.date)}
+              small // voir avec Luc ={false}
+              label="boom"
+            />
+          )}
         </div>
         <div className="col contact">
           <h3>Contactez-nous</h3>

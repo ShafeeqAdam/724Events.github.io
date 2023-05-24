@@ -40,5 +40,14 @@ describe("When slider is created", () => {
     await screen.findByText(
       "Oeuvre à la coopération entre le secteur public et le privé."
     );
+    expect(screen.getByText("World economic forum")).toBeInTheDocument();
+    expect(screen.getByText("janvier")).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        "Oeuvre à la coopération entre le secteur public et le privé."
+      )
+    ).toBeInTheDocument();
   });
 });
+
+// ajout de expect mais toujours les 3 tests skipped
