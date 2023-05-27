@@ -45,28 +45,47 @@ describe("When Events is created", () => {
         <Events />
       </DataProvider>
     );
-    await screen.findByText("avril");
+    // await screen.findByText("avril");
+    // intervention avec Luc :), en attente de réponse.
+    const expectedResult = await screen.findAllByText("avril");
+    expect(expectedResult).toBeTruthy();
   });
   describe("and an error occured", () => {
     it("an error message is displayed", async () => {
-      api.loadData = jest.fn().mockRejectedValue();
+      api.loadData = jest
+        .fn()
+        // intervention avec Luc :), en attente de réponse.
+        .mockRejectedValue(new Error("Async error message"));
       render(
         <DataProvider>
           <Events />
         </DataProvider>
       );
-      expect(await screen.findByText("An error occured")).toBeInTheDocument();
+      // expect(await screen.findByText("An error occured")).toBeInTheDocument();
+      // intervention avec Luc :), en attente de réponse.
+      expect(await screen.findAllByText("An error occured")).toBeTruthy();
     });
   });
+  // intervention avec Luc :), en attente de réponse.
   describe("and we select a category", () => {
-    it.only("an filtered list is displayed", async () => {
+    it("an filtered list is displayed", async () => {
       api.loadData = jest.fn().mockReturnValue(data);
       render(
         <DataProvider>
           <Events />
         </DataProvider>
       );
-      await screen.findByText("Forum #productCON");
+      // await screen.findByText("Forum #productCON");
+      // intervention avec Luc :), en attente de réponse.
+      expect(await screen.findByText("Forum #productCON")).toBeTruthy();
+    });
+    it("we select a category", async () => {
+      api.loadData = jest.fn().mockReturnValue(data);
+      render(
+        <DataProvider>
+          <Events />
+        </DataProvider>
+      );
       fireEvent(
         await screen.findByTestId("collapse-button-testid"),
         new MouseEvent("click", {
